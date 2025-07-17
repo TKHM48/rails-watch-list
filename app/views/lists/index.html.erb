@@ -1,0 +1,28 @@
+<div class="container row justify-content-center">
+  <h1 class="text-center">Movie List</h1>
+  <div class="col-9">
+    <ul>
+      <% @lists.each do |list|%>
+        <li> <%= link_to list.name, list_path(list) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="container row justify-content-center">
+  <%= simple_form_for @list do |f|%>
+    <%= f.input :name %>
+    <%= f.submit "Add a List", class: "btn btn-warning" %>
+  <% end %>
+</div>
+
+  <% if @list.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h4>
+      <ul>
+        <% @list.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
